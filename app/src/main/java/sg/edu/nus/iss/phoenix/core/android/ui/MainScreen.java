@@ -13,6 +13,7 @@ import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 public class MainScreen extends AppCompatActivity {
     private Button mbtn_radio_program;
     private Button mbtn_logout;
+    private Button mbtn_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,15 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ControlFactory.getMainController().selectLogout();
+            }
+        });
+
+        mbtn_user = (Button)findViewById(R.id.button_user);
+        mbtn_user.setOnClickListener(new View.OnClickListener() {
+            // The code in this method will be executed when the numbers category is clicked on.
+            @Override
+            public void onClick(View view) {
+                ControlFactory.getMainController().selectMaintainUser();
             }
         });
     }
