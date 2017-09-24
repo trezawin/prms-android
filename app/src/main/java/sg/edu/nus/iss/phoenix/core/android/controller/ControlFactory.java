@@ -2,6 +2,7 @@ package sg.edu.nus.iss.phoenix.core.android.controller;
 
 import sg.edu.nus.iss.phoenix.authenticate.android.controller.LoginController;
 import sg.edu.nus.iss.phoenix.radioprogram.android.controller.ProgramController;
+import sg.edu.nus.iss.phoenix.schedule.android.controller.ScheduleController;
 import sg.edu.nus.iss.phoenix.user.android.controller.UserController;
 
 public class ControlFactory {
@@ -9,6 +10,7 @@ public class ControlFactory {
     private static LoginController loginController = null;
     private static ProgramController programController = null;
     private static UserController userController = null;
+    private static ScheduleController scheduleController = null;
 
     public static MainController getMainController() {
         if (mainController == null) mainController = new MainController();
@@ -28,5 +30,10 @@ public class ControlFactory {
     public static UserController getUserController() {
         if (userController == null) userController = new UserController();
         return userController;
+    }
+
+    public static ScheduleController getScheduleController(){
+        if(scheduleController == null) scheduleController = new ScheduleController();
+        return scheduleController;
     }
 }
