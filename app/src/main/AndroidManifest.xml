@@ -42,7 +42,13 @@
         <activity android:name=".radioprogram.android.ui.ProgramListScreen" />
         <activity android:name=".radioprogram.android.ui.MaintainProgramScreen" />
         <activity android:name=".user.android.ui.UserList" />
+
         <activity android:name=".schedule.android.ui.MaintainScheduleScreen"></activity>
+        <activity
+            android:name=".schedule.android.ui.ScheduleListScreen"
+            android:label="@string/title_activity_schedule_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

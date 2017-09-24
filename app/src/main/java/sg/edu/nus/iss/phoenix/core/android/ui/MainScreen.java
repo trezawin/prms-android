@@ -14,6 +14,7 @@ public class MainScreen extends AppCompatActivity {
     private Button mbtn_radio_program;
     private Button mbtn_logout;
     private Button mbtn_user;
+    private Button mbtn_schedule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,17 @@ public class MainScreen extends AppCompatActivity {
             public void onClick(View view) {
                 ControlFactory.getMainController().selectMaintainUser();
             }
+        });
+
+        // set button click listener on the Maintain ProgramSlot Button.
+        mbtn_schedule = (Button) findViewById(R.id.button_schedule);
+        mbtn_schedule.setOnClickListener(new View.OnClickListener() {
+            // The code in this method will be executed when the numbers category is clicked on.
+            @Override
+            public void onClick(View view) {
+                ControlFactory.getMainController().selectScheduledProgram();
+            }
+
         });
     }
 

@@ -37,5 +37,6 @@
     <string name="action_cancel">Cancel</string>
     <string name="action_save">Save</string>
     <string name="action_delete">Delete</string>
+    <string name="title_activity_schedule_list">ScheduleListActivity</string>
 
 </resources>

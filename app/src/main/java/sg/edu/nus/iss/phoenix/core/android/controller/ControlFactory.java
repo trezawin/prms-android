@@ -12,6 +12,7 @@ public class ControlFactory {
     private static UserController userController = null;
     private static ScheduleController scheduleController = null;
 
+
     public static MainController getMainController() {
         if (mainController == null) mainController = new MainController();
         return mainController;

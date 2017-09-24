@@ -39,6 +39,10 @@ public class MainController {
         ControlFactory.getProgramController().startUseCase();
     }
 
+    public void selectScheduledProgram() {
+        ControlFactory.getScheduleController().startUseCase();
+    }
+
     public void maintainedProgram() {
         startUseCase(username);
     }
