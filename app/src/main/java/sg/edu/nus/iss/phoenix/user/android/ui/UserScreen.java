@@ -24,6 +24,7 @@ public class UserScreen extends AppCompatActivity {
     private EditText usernameEditText;
     private EditText userRolsEditText;
     private Button updateButton;
+    private Button deleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class UserScreen extends AppCompatActivity {
         usernameEditText = (EditText) findViewById(R.id.maintain_user_name_text);
         userRolsEditText = (EditText) findViewById(R.id.maintain_user_role_text);
         updateButton = (Button)findViewById(R.id.maintain_user_save_button);
+        deleteButton = (Button) findViewById(R.id.maintain_user_delete_button);
     }
 
     @Override
@@ -88,6 +90,15 @@ public class UserScreen extends AppCompatActivity {
                     ControlFactory.getUserController().selectEditUser(tmpUser);
                 else
                     ControlFactory.getUserController().selectCreateUser(tmpUser);
+            }
+        });
+
+
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String userid = useridEditText.getText().toString();
+                ControlFactory.getUserController().selectDeleteUser(userid);
             }
         });
     }

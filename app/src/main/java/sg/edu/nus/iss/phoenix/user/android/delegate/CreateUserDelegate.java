@@ -97,6 +97,6 @@ public class CreateUserDelegate extends AsyncTask<User, Void, Boolean> {
 
     @Override
     protected void onPostExecute(Boolean result) {
-        userController.userUpdated(result.booleanValue());
+        userController.userCreated(result.booleanValue());
     }
 }

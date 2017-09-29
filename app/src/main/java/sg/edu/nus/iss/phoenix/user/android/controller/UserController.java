@@ -9,6 +9,7 @@ import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
 import sg.edu.nus.iss.phoenix.schedule.android.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.schedule.android.ui.MaintainScheduleScreen;
 import sg.edu.nus.iss.phoenix.user.android.delegate.CreateUserDelegate;
+import sg.edu.nus.iss.phoenix.user.android.delegate.DeleteUserDelegate;
 import sg.edu.nus.iss.phoenix.user.android.delegate.RetrieveUsersDelegate;
 import sg.edu.nus.iss.phoenix.user.android.delegate.UpdateUserDelegate;
 import sg.edu.nus.iss.phoenix.user.android.entity.User;
@@ -65,7 +66,8 @@ public class UserController {
 
     ;
 
-    void selectDeleteUser() {
+    public void selectDeleteUser(String userid) {
+        new DeleteUserDelegate(this).execute(userid);
     }
 
     ;
@@ -81,12 +83,16 @@ public class UserController {
 
     ;
 
-    void userCreated() {
+    public void userCreated(boolean flag) {
+        if (flag)
+            startUseCase();
     }
 
     ;
 
-    void userDeleted() {
+    public void userDeleted(boolean flag) {
+        if (flag)
+            startUseCase();
     }
 
     ;
