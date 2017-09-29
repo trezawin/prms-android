@@ -85,7 +85,7 @@ public class RetrieveUsersDelegate extends AsyncTask<String, Void, String> {
                     for(int ii = 0; ii < rolesJsonArray.length(); ii++){
                         roleList.add(new Role(rolesJsonArray.getJSONObject(ii).getString("role")));
                     }
-                    userList.add(new User(id, name, password, roleList));
+                    userList.add(new User(id, password, name, roleList));
                 }
             } catch (JSONException e) {
                 Log.v(TAG, e.getMessage());

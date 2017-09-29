@@ -19,8 +19,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Description"
-        tools:text="Description" />
+        android:text="Password"
+        tools:text="Password" />
 
     <EditText
         android:id="@+id/maintain_user_password_text"
