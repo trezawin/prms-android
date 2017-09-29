@@ -1,10 +1,12 @@
 package sg.edu.nus.iss.phoenix.user.android.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by kmb on 16/9/17.
  */
 
-public class Role {
+public class Role implements Serializable {
     private String role;
     private String accessPrivilege;
 

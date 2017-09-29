@@ -10,6 +10,7 @@ import sg.edu.nus.iss.phoenix.schedule.android.ui.MaintainScheduleScreen;
 import sg.edu.nus.iss.phoenix.user.android.delegate.RetrieveUsersDelegate;
 import sg.edu.nus.iss.phoenix.user.android.entity.User;
 import sg.edu.nus.iss.phoenix.user.android.ui.UserList;
+import sg.edu.nus.iss.phoenix.user.android.ui.UserScreen;
 
 /**
  * Created by kmb on 16/9/17.
@@ -18,6 +19,7 @@ import sg.edu.nus.iss.phoenix.user.android.ui.UserList;
 public class UserController {
     private UserList userListScreen;
     private User user;
+    private UserScreen userScreen;
 
     public void startUseCase(){
         user = null;
@@ -40,4 +42,24 @@ public class UserController {
     public void userRetrieved(List<User> userList){
         this.userListScreen.showUsers(userList);
     }
+
+    public void onDisplayUser(UserScreen userScreen){
+        this.userScreen = userScreen;
+        new RetrieveUsersDelegate(this).execute();
+    }
+    public void selectUpdateUser(User user) {
+        Intent intent = new Intent(MainController.getApp(), UserScreen.class);
+        intent.putExtra("user", user);
+        MainController.displayScreen(intent);
+    };
+
+    void selectCreateUser(){};
+             void selectDeleteUser(){};
+           void selectEditUser() {};
+             void usersRetrieved(){};
+
+           void userCreated() {};
+            void userDeleted(){};
+
+           void userUpdated(){};
 }

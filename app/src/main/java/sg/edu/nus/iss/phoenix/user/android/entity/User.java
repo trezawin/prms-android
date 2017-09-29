@@ -1,5 +1,6 @@
 package sg.edu.nus.iss.phoenix.user.android.entity;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * Created by kmb on 16/9/17.
  */
 
-public class User {
+public class User implements Serializable{
     private String id;
     private String password;
     private String name;

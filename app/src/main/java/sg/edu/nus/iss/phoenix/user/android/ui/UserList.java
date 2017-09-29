@@ -1,9 +1,12 @@
 package sg.edu.nus.iss.phoenix.user.android.ui;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -28,6 +31,33 @@ public class UserList extends AppCompatActivity {
         userAdapter = new UserAdapter(this, users);
         mListView = (ListView)findViewById(R.id.userListView);
         mListView.setAdapter(userAdapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                int itemPosition     = position;
+                User  itemValue = null;
+
+                try {
+                    itemValue = (User) userAdapter.getItem(position);
+                    if(itemValue!=null) {
+                        ControlFactory.getUserController().selectUpdateUser(itemValue);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                /*Toast.makeText(getApplicationContext(),
+                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
+                        .show();*/
+
+            }
+
+        });
     }
 
     @Override
