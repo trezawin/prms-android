@@ -40,24 +40,33 @@ public class UserScreen extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         this.user = (User) this.getIntent().getExtras().get("user");
-
-        StringBuffer roles = new StringBuffer();
-        for(Role role :  this.user.getRoles()){
-            roles.append(",");
-            roles.append(role.getRole());
+        if(this.user!=null){
+            //useridEditText.setVisibility(View.INVISIBLE);
+            useridEditText.setFocusableInTouchMode(false);
+        } else{
+            //useridEditText.setVisibility(View.VISIBLE);
+            useridEditText.setFocusableInTouchMode(true);
         }
+        if(this.user!= null) {
+            StringBuffer roles = new StringBuffer();
+            for (Role role : this.user.getRoles()) {
+                roles.append(",");
+                roles.append(role.getRole());
+            }
 
-        useridEditText.setText(user.getId());
-        passwordEditText.setText(user.getPassword());
-        usernameEditText.setText(user.getName());
-        if(roles.length()>1)
-            userRolsEditText.setText(roles.substring(1).toString());
+            useridEditText.setText(user.getId());
+            passwordEditText.setText(user.getPassword());
+            usernameEditText.setText(user.getName());
+            if (roles.length() > 1)
+                userRolsEditText.setText(roles.substring(1).toString());
+        }
     }
 
 
     @Override
     public void onStart() {
         super.onStart();
+
         updateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String userid = useridEditText.getText().toString();
@@ -70,12 +79,15 @@ public class UserScreen extends AppCompatActivity {
                     Role role = new Role(tmp);
                     roleList.add(role);
                 }
-                User user = new User();
-                user.setId(userid);
-                user.setName(username);
-                user.setPassword(password);
-                user.setRoles(roleList);
-                ControlFactory.getUserController().selectEditUser(user);
+                User tmpUser = new User();
+                tmpUser.setId(userid);
+                tmpUser.setName(username);
+                tmpUser.setPassword(password);
+                tmpUser.setRoles(roleList);
+                if(user!=null)
+                    ControlFactory.getUserController().selectEditUser(tmpUser);
+                else
+                    ControlFactory.getUserController().selectCreateUser(tmpUser);
             }
         });
     }

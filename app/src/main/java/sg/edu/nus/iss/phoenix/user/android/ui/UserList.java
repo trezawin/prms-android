@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -21,11 +22,13 @@ public class UserList extends AppCompatActivity {
     private ListView mListView;
     private UserAdapter userAdapter;
     private User selectedUser = null;
+    private Button createButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
+        createButton = (Button) findViewById(R.id.maintain_user_create_button);
 
         ArrayList<User> users = new ArrayList<User>();
         userAdapter = new UserAdapter(this, users);
@@ -72,5 +75,17 @@ public class UserList extends AppCompatActivity {
         Log.i(UserList.class.getName(), "KMB" + users.size());
         userAdapter.clear();
         userAdapter.addAll(users);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        createButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ControlFactory.getUserController().selectUpdateUser(null);
+            }
+
+        });
     }
 }

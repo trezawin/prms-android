@@ -8,6 +8,7 @@ import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
 import sg.edu.nus.iss.phoenix.schedule.android.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.schedule.android.ui.MaintainScheduleScreen;
+import sg.edu.nus.iss.phoenix.user.android.delegate.CreateUserDelegate;
 import sg.edu.nus.iss.phoenix.user.android.delegate.RetrieveUsersDelegate;
 import sg.edu.nus.iss.phoenix.user.android.delegate.UpdateUserDelegate;
 import sg.edu.nus.iss.phoenix.user.android.entity.User;
@@ -58,7 +59,8 @@ public class UserController {
 
     ;
 
-    void selectCreateUser() {
+    public void selectCreateUser(User user) {
+        new CreateUserDelegate(this).execute(user);
     }
 
     ;
