@@ -43,10 +43,10 @@ public class UserScreen extends AppCompatActivity {
         super.onResume();
         this.user = (User) this.getIntent().getExtras().get("user");
         if(this.user!=null){
-            //useridEditText.setVisibility(View.INVISIBLE);
+            deleteButton.setVisibility(View.VISIBLE);
             useridEditText.setFocusableInTouchMode(false);
         } else{
-            //useridEditText.setVisibility(View.VISIBLE);
+            deleteButton.setVisibility(View.INVISIBLE);
             useridEditText.setFocusableInTouchMode(true);
         }
         if(this.user!= null) {
