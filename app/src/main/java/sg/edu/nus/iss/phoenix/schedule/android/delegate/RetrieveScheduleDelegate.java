@@ -86,7 +86,6 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
                     ProgramSlot ps = new ProgramSlot();
                     ps.setProgramName(programName);
 
-
                     programSlots.add(ps);
 
                 }

@@ -40,5 +40,7 @@
     <string name="title_activity_schedule_list">ScheduleListActivity</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_user_screen">UserScreen</string>
-
+    <string name="copy">Copy</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_copy">Copy</string>
 </resources>

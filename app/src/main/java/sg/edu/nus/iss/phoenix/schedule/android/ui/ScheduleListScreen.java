@@ -6,11 +6,15 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -22,7 +26,10 @@ import java.util.List;
 
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
+import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.schedule.android.entity.ProgramSlot;
+
+import static android.R.attr.mode;
 
 public class ScheduleListScreen extends AppCompatActivity {
 
@@ -39,6 +46,52 @@ public class ScheduleListScreen extends AppCompatActivity {
         scheduleAdapter = new ScheduleAdapter(this, programSlots);
         mListView = (ListView)findViewById(R.id.scheduleListView);
         mListView.setAdapter(scheduleAdapter);
+        registerForContextMenu(mListView); // register the context menu.
+
+        // Setup FAB to add new controller.
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btnAddSchedule);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ControlFactory.getScheduleController().selectCreateSchedule();
+            }
+        });
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if (v.getId()==R.id.scheduleListView) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_add, menu);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch(item.getItemId()) {
+            case R.id.edit:
+                handleEdit(item, info);
+                return true;
+            case R.id.copy:
+                handleCopy(item, info);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    private void handleCopy(MenuItem item, AdapterView.AdapterContextMenuInfo info) {
+        int menuItemIndex = item.getItemId();
+        ProgramSlot selectedProgramSlot = (ProgramSlot) this.mListView.getItemAtPosition(info.position);
+        ControlFactory.getScheduleController().selectCopySchedule(selectedProgramSlot);
+    }
+
+    private void handleEdit(MenuItem item, AdapterView.AdapterContextMenuInfo info) {
+        int menuItemIndex = item.getItemId();
+        ProgramSlot selectedProgramSlot = (ProgramSlot) this.mListView.getItemAtPosition(info.position);
+        ControlFactory.getScheduleController().selectUpdateSchedule(selectedProgramSlot);
     }
 
     @Override
@@ -49,27 +102,10 @@ public class ScheduleListScreen extends AppCompatActivity {
         ControlFactory.getScheduleController().onDisplayScheduleList(this);
     }
 
-    public void showProgramslots(List<ProgramSlot> programSlots) {
+    public void showProgramlots(List<ProgramSlot> programSlots) {
         Log.i(ScheduleListScreen.class.getName(), " " + programSlots.size());
         scheduleAdapter.clear();
         scheduleAdapter.addAll(programSlots);
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu_xml_name, menu);
-        return true;
-    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.menu_item_id:
-//                // action
-//                break;
-//        }
-//        return true;
-//    }
 
 }
