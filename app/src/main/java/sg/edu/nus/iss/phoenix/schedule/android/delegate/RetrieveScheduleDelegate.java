@@ -73,9 +73,13 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         List<ProgramSlot> programSlots = new ArrayList<>();
+        processResponse(result, programSlots);
+        scheduleController.retrievedSchedules(programSlots);
+    }
 
+    public void processResponse(String result, List<ProgramSlot> programSlots) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX"); // eg; 1970-01-01T00:12:34+07:30
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+//        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         if (result != null && !result.equals("")) {
             try {
@@ -106,7 +110,5 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
         } else {
             Log.v(TAG, "JSON response error.");
         }
-
-        scheduleController.retrievedSchedules(programSlots);
     }
 }
