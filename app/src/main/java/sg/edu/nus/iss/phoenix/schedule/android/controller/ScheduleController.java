@@ -32,7 +32,7 @@ public class ScheduleController {
     }
 
     public void retrievedSchedules(List<ProgramSlot> programSlots) {
-        scheduleListScreen.showProgramlots(programSlots);
+        scheduleListScreen.showProgramslots(programSlots);
     }
 
     public void scheduleCreated(Boolean status){

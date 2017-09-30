@@ -13,10 +13,13 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.TimeZone;
 
 import sg.edu.nus.iss.phoenix.radioprogram.android.controller.ProgramController;
 import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
@@ -71,20 +74,26 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         List<ProgramSlot> programSlots = new ArrayList<>();
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX"); // eg; 1970-01-01T00:12:34+07:30
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+
         if (result != null && !result.equals("")) {
             try {
                 JSONArray rpArray = new JSONArray(result);
 
                 for (int i = 0; i < rpArray.length(); i++) {
                     JSONObject rpJson = rpArray.getJSONObject(i);
-                    String programName = rpJson.getString("programName");
 
                     String duration = rpJson.getString("duration");
                     String dateOfProgram = rpJson.getString("dateOfProgram");
 
-                    // TODO ; change to use time from JSON
                     ProgramSlot ps = new ProgramSlot();
-                    ps.setProgramName(programName);
+                    ps.setProgramName(rpJson.getString("programName"));
+                    ps.setDuration(sdf.parse(duration));
+                    ps.setDateOfProgram(sdf.parse(dateOfProgram));
+
+                    //TODO : to remove comment
+//                    ps.setAssignedBy((rpJson.getString("assignedBy") == null? "" : rpJson.getString("assignedBy")));
 
                     programSlots.add(ps);
 

@@ -102,7 +102,7 @@ public class ScheduleListScreen extends AppCompatActivity {
         ControlFactory.getScheduleController().onDisplayScheduleList(this);
     }
 
-    public void showProgramlots(List<ProgramSlot> programSlots) {
+    public void showProgramslots(List<ProgramSlot> programSlots) {
         Log.i(ScheduleListScreen.class.getName(), " " + programSlots.size());
         scheduleAdapter.clear();
         scheduleAdapter.addAll(programSlots);
