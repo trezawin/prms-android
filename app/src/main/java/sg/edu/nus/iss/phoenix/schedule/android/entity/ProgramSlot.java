@@ -13,51 +13,52 @@ public class ProgramSlot implements Serializable {
     private Date dateOfProgram;
     private String programName;
     private String assignedBy;
-    private String presenterId;
-    private String presenterName;
-    private String producerId;
-    private String producerName;
-    private String radioProgramName;
 
-    public String getPresenterId() {
-        return presenterId;
-    }
-
-    public void setPresenterId(String presenterId) {
-        this.presenterId = presenterId;
-    }
-
-    public String getPresenterName() {
-        return presenterName;
-    }
-
-    public void setPresenterName(String presenterName) {
-        this.presenterName = presenterName;
-    }
-
-    public String getProducerId() {
-        return producerId;
-    }
-
-    public void setProducerId(String producerId) {
-        this.producerId = producerId;
-    }
-
-    public String getProducerName() {
-        return producerName;
-    }
-
-    public void setProducerName(String producerName) {
-        this.producerName = producerName;
-    }
-
-    public String getRadioProgramName() {
-        return radioProgramName;
-    }
-
-    public void setRadioProgramName(String radioProgramName) {
-        this.radioProgramName = radioProgramName;
-    }
+//    private String presenterId;
+//    private String presenterName;
+//    private String producerId;
+//    private String producerName;
+//    private String radioProgramName;
+//
+//    public String getPresenterId() {
+//        return presenterId;
+//    }
+//
+//    public void setPresenterId(String presenterId) {
+//        this.presenterId = presenterId;
+//    }
+//
+//    public String getPresenterName() {
+//        return presenterName;
+//    }
+//
+//    public void setPresenterName(String presenterName) {
+//        this.presenterName = presenterName;
+//    }
+//
+//    public String getProducerId() {
+//        return producerId;
+//    }
+//
+//    public void setProducerId(String producerId) {
+//        this.producerId = producerId;
+//    }
+//
+//    public String getProducerName() {
+//        return producerName;
+//    }
+//
+//    public void setProducerName(String producerName) {
+//        this.producerName = producerName;
+//    }
+//
+//    public String getRadioProgramName() {
+//        return radioProgramName;
+//    }
+//
+//    public void setRadioProgramName(String radioProgramName) {
+//        this.radioProgramName = radioProgramName;
+//    }
 
     public String getAssignedBy() {
         return assignedBy;

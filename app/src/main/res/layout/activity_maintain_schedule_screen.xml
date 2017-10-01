@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:focusable="true" android:focusableInTouchMode="true"
     tools:context="sg.edu.nus.iss.phoenix.schedule.android.ui.MaintainScheduleScreen">
     <TextView
         android:layout_width="match_parent"
@@ -58,12 +59,6 @@
         android:id="@+id/txtReviewSelectProducer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/btnSelectPresenterProducer"
-        android:text="Select Presenter/Producer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btnSave"

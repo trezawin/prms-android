@@ -24,7 +24,6 @@ public class MaintainScheduleScreen extends AppCompatActivity {
 
     private Button btnSave;
     private Button btnDelete;
-    private Button btnSelectPresenterProducer;
     private EditText txtProgram;
     private EditText txtStartDatetime;
     private EditText txtDuration;
@@ -45,7 +44,7 @@ public class MaintainScheduleScreen extends AppCompatActivity {
 
         btnSave = (Button)findViewById(R.id.btnSave);
         btnDelete = (Button) findViewById(R.id.btnDelete);
-        btnSelectPresenterProducer = (Button) findViewById(R.id.btnSelectPresenterProducer);
+
         txtReviewSelectPresenterProducer = (EditText) findViewById(R.id.txtReviewSelectPresenterProducer);
         txtReviewSelectProducer = (EditText)findViewById(R.id.txtReviewSelectProducer);
 
@@ -97,13 +96,6 @@ public class MaintainScheduleScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ControlFactory.getScheduleController().deleteSchedule(MaintainScheduleScreen.this, programSlot.getId());
-            }
-        });
-
-        btnSelectPresenterProducer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ControlFactory.getScheduleController().selectReviewSelectPresenterProducer(MaintainScheduleScreen.this, "presenter");
             }
         });
 
