@@ -1,7 +1,10 @@
 package sg.edu.nus.iss.phoenix.user.android.ui;
 
+import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +14,9 @@ import java.util.List;
 
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
+import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
 import sg.edu.nus.iss.phoenix.radioprogram.android.delegate.UpdateProgramDelegate;
+import sg.edu.nus.iss.phoenix.schedule.android.ui.ScheduleListScreen;
 import sg.edu.nus.iss.phoenix.user.android.delegate.UpdateUserDelegate;
 import sg.edu.nus.iss.phoenix.user.android.entity.Role;
 import sg.edu.nus.iss.phoenix.user.android.entity.User;
@@ -36,6 +41,12 @@ public class UserScreen extends AppCompatActivity {
         userRolsEditText = (EditText) findViewById(R.id.maintain_user_role_text);
         updateButton = (Button)findViewById(R.id.maintain_user_save_button);
         deleteButton = (Button) findViewById(R.id.maintain_user_delete_button);
+
+        // set back button action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
     }
 
     @Override
@@ -64,6 +75,13 @@ public class UserScreen extends AppCompatActivity {
         }
     }
 
+    // back button action bar
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        Intent intent = new Intent(getApplicationContext(), UserList.class);
+        MainController.displayScreen(intent);
+        return true;
+    }
 
     @Override
     public void onStart() {

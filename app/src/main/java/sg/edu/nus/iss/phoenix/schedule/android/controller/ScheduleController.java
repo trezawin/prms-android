@@ -91,7 +91,6 @@ public class ScheduleController {
         MainController.displayScreen(intent);
     }
 
-
     public void selectReviewSelectPresenterProducer(Activity parentScreen, String type) {
         ControlFactory.getReviewSelectPresenterProducerController().startUseCase(parentScreen, type);
     }

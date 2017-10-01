@@ -1,9 +1,11 @@
 package sg.edu.nus.iss.phoenix.schedule.android.ui;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,7 @@ import java.util.Date;
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
+import sg.edu.nus.iss.phoenix.core.android.ui.MainScreen;
 import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.schedule.android.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.user.android.entity.User;
@@ -51,6 +54,12 @@ public class MaintainScheduleScreen extends AppCompatActivity {
         txtProgram = (EditText) findViewById(R.id.txtProgram);
         txtStartDatetime = (EditText)findViewById(R.id.txtStartDatetime);
         txtDuration = (EditText)findViewById(R.id.txtDuration);
+
+        // set back button action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
 
         if(programSlot == null) {
             programSlot = new ProgramSlot();
@@ -129,7 +138,8 @@ public class MaintainScheduleScreen extends AppCompatActivity {
             }
         });
 
-        if(programSlot.getId() > 0 || !programSlot.getProgramName().equals("")){
+        if(programSlot.getId() > 0 || (programSlot.getProgramName() != null &&
+                !programSlot.getProgramName().equals(""))){
             SimpleDateFormat programDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             Calendar durationCalendar = Calendar.getInstance();
             durationCalendar.setTime(programSlot.getDuration());
@@ -146,6 +156,14 @@ public class MaintainScheduleScreen extends AppCompatActivity {
             producer = new User();
             producer.setId(programSlot.getProducerId());
         }
+    }
+
+    // back button action bar
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        Intent intent = new Intent(getApplicationContext(), ScheduleListScreen.class);
+        MainController.displayScreen(intent);
+        return true;
     }
 
     public boolean isValidData() {

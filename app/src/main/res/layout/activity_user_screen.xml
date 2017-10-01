@@ -9,8 +9,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ID"
-        tools:text="ID" />
+        android:text="User ID"
+        tools:text="User ID" />
     <EditText
         android:id="@+id/maintain_user_id_text"
         android:layout_width="match_parent"

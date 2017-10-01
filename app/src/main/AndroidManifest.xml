@@ -42,12 +42,12 @@
         <activity android:name=".radioprogram.android.ui.ProgramListScreen" />
         <activity android:name=".radioprogram.android.ui.MaintainProgramScreen" />
         <activity android:name=".user.android.ui.UserList" />
-        <activity android:name=".schedule.android.ui.MaintainScheduleScreen" />
+        <activity android:name=".schedule.android.ui.MaintainScheduleScreen"
+            android:label="@string/scheduleScreen"/>
         <activity android:name=".user.android.presenterProducer.ui.PresenterProducerListScreen"/>
         <activity
             android:name=".schedule.android.ui.ScheduleListScreen"
-            android:label="@string/title_activity_schedule_list"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_schedule_list" />
         <activity android:name=".user.android.ui.UserScreen"></activity>
     </application>
 

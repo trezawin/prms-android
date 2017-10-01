@@ -2,9 +2,11 @@ package sg.edu.nus.iss.phoenix.user.android.ui;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,6 +17,9 @@ import java.util.List;
 
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
+import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
+import sg.edu.nus.iss.phoenix.core.android.ui.MainScreen;
+import sg.edu.nus.iss.phoenix.schedule.android.ui.ScheduleListScreen;
 import sg.edu.nus.iss.phoenix.user.android.entity.User;
 
 public class UserList extends AppCompatActivity {
@@ -29,6 +34,12 @@ public class UserList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
         createButton = (Button) findViewById(R.id.maintain_user_create_button);
+
+        // set back button action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
 
         ArrayList<User> users = new ArrayList<User>();
         userAdapter = new UserAdapter(this, users);
@@ -75,6 +86,14 @@ public class UserList extends AppCompatActivity {
         Log.i(UserList.class.getName(), "KMB" + users.size());
         userAdapter.clear();
         userAdapter.addAll(users);
+    }
+
+    // back button action bar
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        Intent intent = new Intent(getApplicationContext(), MainScreen.class);
+        MainController.displayScreen(intent);
+        return true;
     }
 
     @Override
