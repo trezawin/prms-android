@@ -49,7 +49,7 @@ public class CreateScheduleDelegate extends AsyncTask<ProgramSlot, Void, Boolean
         try {
             programSlotJson.put("name", params[0].getProgramName());
             programSlotJson.put("durationTimestamp", params[0].getDuration().getTime());
-            programSlotJson.put("dateOfProgramTimestamp", params[0].getDuration().getTime());
+            programSlotJson.put("dateOfProgramTimestamp", params[0].getDateOfProgram().getTime());
             programSlotJson.put("assignedBy", params[0].getAssignedBy());
             programSlotJson.put("presenterId", params[0].getPresenterId());
             programSlotJson.put("producerId", params[0].getProducerId());

@@ -129,7 +129,7 @@ public class MaintainScheduleScreen extends AppCompatActivity {
             }
         });
 
-        if(programSlot.getId() > 0){
+        if(programSlot.getId() > 0 || !programSlot.getProgramName().equals("")){
             SimpleDateFormat programDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             Calendar durationCalendar = Calendar.getInstance();
             durationCalendar.setTime(programSlot.getDuration());
