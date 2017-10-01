@@ -19,7 +19,6 @@ import sg.edu.nus.iss.phoenix.schedule.android.ui.ScheduleListScreen;
 /**
  * Created by treza on 9/23/17.
  */
-
 public class ScheduleController {
     private ScheduleListScreen scheduleListScreen;
     private MaintainScheduleScreen maintainScheduleScreen;
@@ -76,6 +75,7 @@ public class ScheduleController {
 
     public void selectCreateSchedule() {
         Intent intent = new Intent(MainController.getApp(), MaintainScheduleScreen.class);
+        intent.putExtra("programSlot", new ProgramSlot());
         MainController.displayScreen(intent);
     }
 
@@ -86,8 +86,8 @@ public class ScheduleController {
     }
 
     public void selectCopySchedule(ProgramSlot programSlot) {
-        // TODO : to change to go to CopyScheduleScreen.
         Intent intent = new Intent(MainController.getApp(), MaintainScheduleScreen.class);
+        programSlot.setId(0);
         intent.putExtra("programSlot", programSlot);
         MainController.displayScreen(intent);
     }
