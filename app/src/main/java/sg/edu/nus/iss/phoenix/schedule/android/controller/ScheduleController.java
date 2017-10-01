@@ -5,9 +5,6 @@ import android.content.Intent;
 import java.util.List;
 
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
-import sg.edu.nus.iss.phoenix.radioprogram.android.delegate.RetrieveProgramsDelegate;
-import sg.edu.nus.iss.phoenix.radioprogram.android.ui.MaintainProgramScreen;
-import sg.edu.nus.iss.phoenix.radioprogram.android.ui.ProgramListScreen;
 import sg.edu.nus.iss.phoenix.schedule.android.delegate.CreateScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.android.delegate.DeleteScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.android.delegate.RetrieveScheduleDelegate;
@@ -28,16 +25,14 @@ public class ScheduleController {
         MainController.displayScreen(intent);
     }
 
-    public void selectCreateScheduleScreen(){
-        Intent intent = new Intent(MainController.getApp(), MaintainScheduleScreen.class);
-        intent.putExtra("program_slot", new ProgramSlot());
-        MainController.displayScreen(intent);
-    }
-
     public void createSchedule(MaintainScheduleScreen maintainScheduleScreen, ProgramSlot programSlot){
         // TODO update DM
         new CreateScheduleDelegate(this).execute(programSlot);
         this.maintainScheduleScreen = maintainScheduleScreen;
+    }
+
+    public void scheduleCreated(Boolean status){
+        this.startUseCase();
     }
 
     public void updateSchedule(MaintainScheduleScreen maintainScheduleScreen, ProgramSlot programSlot){
@@ -67,10 +62,6 @@ public class ScheduleController {
 
     public void retrievedSchedules(List<ProgramSlot> programSlots) {
         scheduleListScreen.showProgramslots(programSlots);
-    }
-
-    public void scheduleCreated(Boolean status){
-        this.startUseCase();
     }
 
     public void selectCreateSchedule() {
