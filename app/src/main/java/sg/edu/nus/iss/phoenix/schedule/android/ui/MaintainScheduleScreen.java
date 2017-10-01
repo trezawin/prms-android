@@ -16,6 +16,7 @@ import java.util.Date;
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
+import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.schedule.android.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.user.android.entity.User;
 
@@ -33,6 +34,7 @@ public class MaintainScheduleScreen extends AppCompatActivity {
     private ProgramSlot programSlot;
     private User presenter;
     private User producer;
+    private RadioProgram radioProgram;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +125,15 @@ public class MaintainScheduleScreen extends AppCompatActivity {
                 }
             }
         });
+
+        txtProgram.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    ControlFactory.getProgramController().startUseCase(MaintainScheduleScreen.this);
+                }
+            }
+        });
     }
 
     public boolean isValidData() {
@@ -140,12 +151,19 @@ public class MaintainScheduleScreen extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 1){
-            presenter = (User)data.getSerializableExtra("user");
-            txtReviewSelectPresenterProducer.setText(presenter.getName());
-        }else{
-            producer = (User)data.getSerializableExtra("user");
-            txtReviewSelectProducer.setText(producer.getName());
+        switch (requestCode){
+            case 1:
+                presenter = (User)data.getSerializableExtra("user");
+                txtReviewSelectPresenterProducer.setText(presenter.getName());
+                break;
+            case 2:
+                producer = (User)data.getSerializableExtra("user");
+                txtReviewSelectProducer.setText(producer.getName());
+                break;
+            case 3:
+                radioProgram = (RadioProgram)data.getSerializableExtra("radio_program");
+                txtProgram.setText(radioProgram.getRadioProgramName());
+                break;
         }
     }
 }
