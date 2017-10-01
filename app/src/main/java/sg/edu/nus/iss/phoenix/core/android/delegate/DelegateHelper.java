@@ -12,4 +12,6 @@ public class DelegateHelper {
 
     public final static String PRMS_BASE_URL_SCHEDULE = PRMS_ROOT_URL + "/schedule";
     public final static String PRMS_BASE_URL_SCHEDULE_CREATE = PRMS_BASE_URL_SCHEDULE + "/create";
+    public final static String PRMS_BASE_URL_SCHEDULE_UPDATE = PRMS_BASE_URL_SCHEDULE + "/update";
+    public final static String PRMS_BASE_URL_SCHEDULE_DELETE = PRMS_BASE_URL_SCHEDULE + "/delete";
 }

@@ -9,7 +9,9 @@ import sg.edu.nus.iss.phoenix.radioprogram.android.delegate.RetrieveProgramsDele
 import sg.edu.nus.iss.phoenix.radioprogram.android.ui.MaintainProgramScreen;
 import sg.edu.nus.iss.phoenix.radioprogram.android.ui.ProgramListScreen;
 import sg.edu.nus.iss.phoenix.schedule.android.delegate.CreateScheduleDelegate;
+import sg.edu.nus.iss.phoenix.schedule.android.delegate.DeleteScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.android.delegate.RetrieveScheduleDelegate;
+import sg.edu.nus.iss.phoenix.schedule.android.delegate.UpdateScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.android.entity.ProgramSlot;
 import sg.edu.nus.iss.phoenix.schedule.android.ui.MaintainScheduleScreen;
 import sg.edu.nus.iss.phoenix.schedule.android.ui.ScheduleListScreen;
@@ -33,12 +35,30 @@ public class ScheduleController {
         MainController.displayScreen(intent);
     }
 
-    public void createSchedule(ProgramSlot programSlot){
+    public void createSchedule(MaintainScheduleScreen maintainScheduleScreen, ProgramSlot programSlot){
+        // TODO update DM
         new CreateScheduleDelegate(this).execute(programSlot);
+        this.maintainScheduleScreen = maintainScheduleScreen;
     }
 
-    public void updateSchedule(ProgramSlot programSlot){
+    public void updateSchedule(MaintainScheduleScreen maintainScheduleScreen, ProgramSlot programSlot){
+        // TODO update DM
+        new UpdateScheduleDelegate(this).execute(programSlot);
+        this.maintainScheduleScreen = maintainScheduleScreen;
+    }
 
+    public void scheduleUpdated(Boolean status){
+        this.startUseCase();
+    }
+
+    public void deleteSchedule(MaintainScheduleScreen maintainScheduleScreen, int scheduleId){
+        // TODO update DM
+        new DeleteScheduleDelegate(this).execute(scheduleId);
+        this.maintainScheduleScreen = maintainScheduleScreen;
+    }
+
+    public void scheduleDeleted(Boolean status){
+        this.startUseCase();
     }
 
     public void onDisplayScheduleList(ScheduleListScreen scheduleListScreen) {
