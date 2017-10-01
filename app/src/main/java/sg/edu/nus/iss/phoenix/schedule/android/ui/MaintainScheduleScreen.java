@@ -55,16 +55,13 @@ public class MaintainScheduleScreen extends AppCompatActivity {
         if(programSlot == null) {
             programSlot = new ProgramSlot();
         }
-        if(programSlot.getId() > 0){
+        if(programSlot.getId() > 0) {
             btnDelete.setVisibility(View.VISIBLE);
         }
-        if(programSlot.getId() == 0 && programSlot.getProgramName()!= null &&
-                !programSlot.getProgramName().equals(""))
-            btnSave.setText("Copy");
 
-                btnSave.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 try {
                     if(MaintainScheduleScreen.this.isValidData()){
                         SimpleDateFormat startDateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -72,6 +69,11 @@ public class MaintainScheduleScreen extends AppCompatActivity {
                         programSlot.setProgramName(txtProgram.getText().toString());
                         programSlot.setAssignedBy(MainController.getLoggedInUserName());
                         programSlot.setDateOfProgram(startDateTimeFormat.parse(txtStartDatetime.getText().toString()));
+                        if(producer != null)
+                            programSlot.setProducerId(producer.getId());
+                        if(presenter != null)
+                            programSlot.setPresenterId(producer.getId());
+                        programSlot.setAssignedBy(MainController.getLoggedInUserName());
 
                         Calendar durationCalendar = Calendar.getInstance();
                         durationCalendar.setTime(new Date());
@@ -126,6 +128,24 @@ public class MaintainScheduleScreen extends AppCompatActivity {
                 }
             }
         });
+
+        if(programSlot.getId() > 0){
+            SimpleDateFormat programDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            Calendar durationCalendar = Calendar.getInstance();
+            durationCalendar.setTime(programSlot.getDuration());
+
+            txtProgram.setText(programSlot.getProgramName());
+            txtReviewSelectPresenterProducer.setText(programSlot.getPresenterName());
+            txtReviewSelectProducer.setText(programSlot.getProducerName());
+            txtStartDatetime.setText(programDateFormat.format(programSlot.getDateOfProgram()));
+            txtDuration.setText(String.valueOf(durationCalendar.get(Calendar.MINUTE)));
+
+            presenter = new User();
+            presenter.setId(programSlot.getPresenterId());
+
+            producer = new User();
+            producer.setId(programSlot.getProducerId());
+        }
     }
 
     public boolean isValidData() {

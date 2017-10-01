@@ -95,11 +95,10 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
                     ps.setDuration(sdf.parse(duration));
                     ps.setDateOfProgram(sdf.parse(dateOfProgram));
 
-//                    ps.setPresenterId(rpJson.getString("presenterId"));
-//                    ps.setPresenterName(rpJson.getString("presenterName"));
-//                    ps.setProducerId(rpJson.getString("producerId"));
-//                    ps.setProducerName(rpJson.getString("producerName"));
-//                    ps.setRadioProgramName(rpJson.getString("radioProgramName"));
+                    ps.setPresenterId(rpJson.getString("presenterId"));
+                    ps.setPresenterName(rpJson.getString("presenterName"));
+                    ps.setProducerId(rpJson.getString("producerId"));
+                    ps.setProducerName(rpJson.getString("producerName"));
 
                     //TODO : to remove comment
 //                    ps.setAssignedBy((rpJson.getString("assignedBy") == null? "" : rpJson.getString("assignedBy")));
