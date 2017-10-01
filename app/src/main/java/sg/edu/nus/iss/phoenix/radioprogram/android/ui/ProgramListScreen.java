@@ -1,5 +1,7 @@
 package sg.edu.nus.iss.phoenix.radioprogram.android.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -59,10 +61,19 @@ public class ProgramListScreen extends AppCompatActivity {
         mListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                // Log.v(TAG, "Radio program at position " + position + " selected.");
-                RadioProgram rp = (RadioProgram) adapterView.getItemAtPosition(position);
-                // Log.v(TAG, "Radio program name is " + rp.getRadioProgramName());
-                selectedRP = rp;
+                if(ProgramListScreen.this.getIntent().getStringExtra("activity_type") != null){
+                    RadioProgram rp = (RadioProgram) adapterView.getItemAtPosition(position);
+
+                    Intent intent = new Intent();
+                    intent.putExtra("radio_program", rp);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }else{
+                    // Log.v(TAG, "Radio program at position " + position + " selected.");
+                    RadioProgram rp = (RadioProgram) adapterView.getItemAtPosition(position);
+                    // Log.v(TAG, "Radio program name is " + rp.getRadioProgramName());
+                    selectedRP = rp;
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
