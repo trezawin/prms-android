@@ -4,8 +4,15 @@
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/lblSchedule"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:textSize="28sp"
+        android:text="Program Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/lblScheduleDateTime"
+        android:paddingTop="40dp"
+        android:textSize="18sp"
+        android:text="Datetime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </RelativeLayout>

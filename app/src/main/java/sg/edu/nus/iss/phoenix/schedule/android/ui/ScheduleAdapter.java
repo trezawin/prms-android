@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import sg.edu.nus.iss.phoenix.R;
@@ -27,6 +29,7 @@ public class ScheduleAdapter extends ArrayAdapter<ProgramSlot> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listItemView = convertView;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd HH:mm");
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.schedule_list, parent, false);
@@ -36,6 +39,9 @@ public class ScheduleAdapter extends ArrayAdapter<ProgramSlot> {
 
         TextView lblProgramSlot = (TextView)listItemView.findViewById(R.id.lblSchedule);
         lblProgramSlot.setText(programSlot.getProgramName());
+
+        TextView lblProgramSlotDatetime = (TextView) listItemView.findViewById(R.id.lblScheduleDateTime);
+        lblProgramSlotDatetime.setText(sdf.format(programSlot.getDateOfProgram()));
 
         return listItemView;
     }

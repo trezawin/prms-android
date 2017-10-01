@@ -47,6 +47,7 @@
             android:name=".schedule.android.ui.ScheduleListScreen"
             android:label="@string/title_activity_schedule_list"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".user.android.ui.UserScreen"></activity>
     </application>
 
 </manifest>

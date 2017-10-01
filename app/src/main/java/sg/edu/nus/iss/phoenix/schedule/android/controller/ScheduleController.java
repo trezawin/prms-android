@@ -6,8 +6,8 @@ import java.util.List;
 
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
 import sg.edu.nus.iss.phoenix.radioprogram.android.delegate.RetrieveProgramsDelegate;
+import sg.edu.nus.iss.phoenix.radioprogram.android.ui.MaintainProgramScreen;
 import sg.edu.nus.iss.phoenix.radioprogram.android.ui.ProgramListScreen;
-import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.schedule.android.delegate.CreateScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.android.delegate.RetrieveScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.android.entity.ProgramSlot;
@@ -33,11 +33,11 @@ public class ScheduleController {
         MainController.displayScreen(intent);
     }
 
-    public void selectCreateSchedule(ProgramSlot programSlot){
+    public void createSchedule(ProgramSlot programSlot){
         new CreateScheduleDelegate(this).execute(programSlot);
     }
 
-    public void selectUpdateSchedule(ProgramSlot programSlot){
+    public void updateSchedule(ProgramSlot programSlot){
 
     }
 
@@ -52,5 +52,23 @@ public class ScheduleController {
 
     public void scheduleCreated(Boolean status){
         this.startUseCase();
+    }
+
+    public void selectCreateSchedule() {
+        Intent intent = new Intent(MainController.getApp(), MaintainScheduleScreen.class);
+        MainController.displayScreen(intent);
+    }
+
+    public void selectUpdateSchedule(ProgramSlot programSlot) {
+        Intent intent = new Intent(MainController.getApp(), MaintainScheduleScreen.class);
+        intent.putExtra("programSlot", programSlot);
+        MainController.displayScreen(intent);
+    }
+
+    public void selectCopySchedule(ProgramSlot programSlot) {
+        // TODO : to change to go to CopyScheduleScreen.
+        Intent intent = new Intent(MainController.getApp(), MaintainScheduleScreen.class);
+        intent.putExtra("programSlot", programSlot);
+        MainController.displayScreen(intent);
     }
 }
