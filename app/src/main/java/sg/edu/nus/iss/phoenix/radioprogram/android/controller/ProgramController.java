@@ -1,5 +1,6 @@
 package sg.edu.nus.iss.phoenix.radioprogram.android.controller;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 
@@ -27,6 +28,12 @@ public class ProgramController {
         rp2edit = null;
         Intent intent = new Intent(MainController.getApp(), ProgramListScreen.class);
         MainController.displayScreen(intent);
+    }
+
+    public void startUseCase(Activity parentActivity){
+        Intent intent = new Intent(MainController.getApp(), ProgramListScreen.class);
+        intent.putExtra("activity_type", "dialog");
+        parentActivity.startActivityForResult(intent, 3);
     }
 
     public void onDisplayProgramList(ProgramListScreen programListScreen) {
