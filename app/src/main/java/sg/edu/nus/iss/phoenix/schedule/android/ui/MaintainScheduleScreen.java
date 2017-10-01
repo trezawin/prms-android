@@ -80,7 +80,7 @@ public class MaintainScheduleScreen extends AppCompatActivity {
                         durationCalendar.set(Calendar.HOUR_OF_DAY, 0);
                         durationCalendar.set(Calendar.SECOND, 0);
                         durationCalendar.set(Calendar.MILLISECOND, 0);
-                        durationCalendar.add(Calendar.MINUTE, Integer.parseInt(txtDuration.getText().toString()));
+                        durationCalendar.set(Calendar.MINUTE, Integer.parseInt(txtDuration.getText().toString()));
                         programSlot.setDuration(durationCalendar.getTime());
 
                         if(programSlot.getId() == 0)
