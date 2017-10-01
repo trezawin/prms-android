@@ -79,7 +79,6 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
 
     public void processResponse(String result, List<ProgramSlot> programSlots) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"); // eg; 1970-01-01T00:12:34+07:30
-//        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         if (result != null && !result.equals("")) {
             try {
@@ -95,11 +94,12 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
                     ps.setProgramName(rpJson.getString("programName"));
                     ps.setDuration(sdf.parse(duration));
                     ps.setDateOfProgram(sdf.parse(dateOfProgram));
-                    ps.setPresenterId(rpJson.getString("presenterId"));
-                    ps.setPresenterName(rpJson.getString("presenterName"));
-                    ps.setProducerId(rpJson.getString("producerId"));
-                    ps.setProducerName(rpJson.getString("producerName"));
-                    ps.setRadioProgramName(rpJson.getString("radioProgramName"));
+
+//                    ps.setPresenterId(rpJson.getString("presenterId"));
+//                    ps.setPresenterName(rpJson.getString("presenterName"));
+//                    ps.setProducerId(rpJson.getString("producerId"));
+//                    ps.setProducerName(rpJson.getString("producerName"));
+//                    ps.setRadioProgramName(rpJson.getString("radioProgramName"));
 
                     //TODO : to remove comment
 //                    ps.setAssignedBy((rpJson.getString("assignedBy") == null? "" : rpJson.getString("assignedBy")));

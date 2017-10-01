@@ -52,11 +52,11 @@ public class CreateScheduleDelegate extends AsyncTask<ProgramSlot, Void, Boolean
             programSlotJson.put("dateOfProgramTimestamp", params[0].getDuration().getTime());
             programSlotJson.put("assignedBy", params[0].getAssignedBy());
 
-            programSlotJson.put("presenterId", params[0].getPresenterId());
-            programSlotJson.put("presenterName", params[0].getPresenterName());
-            programSlotJson.put("producerId", params[0].getProducerId());
-            programSlotJson.put("producerName", params[0].getProducerName());
-            programSlotJson.put("radioProgramName", params[0].getRadioProgramName());
+//            programSlotJson.put("presenterId", params[0].getPresenterId());
+//            programSlotJson.put("presenterName", params[0].getPresenterName());
+//            programSlotJson.put("producerId", params[0].getProducerId());
+//            programSlotJson.put("producerName", params[0].getProducerName());
+//            programSlotJson.put("radioProgramName", params[0].getRadioProgramName());
 
         } catch (JSONException e) {
             Log.v(TAG, e.getMessage());

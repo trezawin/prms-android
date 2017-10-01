@@ -44,7 +44,6 @@
         <activity android:name=".user.android.ui.UserList" />
         <activity android:name=".schedule.android.ui.MaintainScheduleScreen" />
         <activity android:name=".user.android.presenterProducer.ui.PresenterProducerListScreen"/>
-        <activity android:name=".user.android.presenterProducer.ui.ReviewSelectProducerPresenterScreen" />
         <activity
             android:name=".schedule.android.ui.ScheduleListScreen"
             android:label="@string/title_activity_schedule_list"
