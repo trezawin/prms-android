@@ -1,12 +1,13 @@
 package sg.edu.nus.iss.phoenix.user.android.presenterProducer.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -20,22 +21,20 @@ import sg.edu.nus.iss.phoenix.user.android.entity.User;
 /**
  * Created by treza on 01/10/17.
  */
-public class PresenterProducerList extends AppCompatActivity {
+public class PresenterProducerListScreen extends AppCompatActivity {
 
     private ListView mListView;
     private PresenterProducerAdapter presenterProducerAdapter;
     private User selectedUser = null;
-    private Button createButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_list);
-        createButton = (Button) findViewById(R.id.maintain_user_create_button);
+        setContentView(R.layout.activity_presenterproducer_list);
 
         ArrayList<User> users = new ArrayList<User>();
         presenterProducerAdapter = new PresenterProducerAdapter(this, users);
-        mListView = (ListView)findViewById(R.id.userListView);
+        mListView = (ListView)findViewById(R.id.prenternProducerListView);
         mListView.setAdapter(presenterProducerAdapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -43,16 +42,16 @@ public class PresenterProducerList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
-                int itemPosition     = position;
-                User  itemValue = null;
-
+                int itemPosition = position;
+                User itemValue = null;
                 try {
                     itemValue = (User) presenterProducerAdapter.getItem(position);
                     if(itemValue!=null) {
-                        ControlFactory.getUserController().selectUpdateUser(itemValue);
+                        Intent intent = new Intent();
+                        intent.putExtra("user", itemValue);
+                        setResult(Activity.RESULT_OK, intent);
+                        finish();
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -70,7 +69,7 @@ public class PresenterProducerList extends AppCompatActivity {
     }
 
     public void showUsers(List<User> users) {
-        Log.i(PresenterProducerList.class.getName(), "KMB" + users.size());
+        Log.i(PresenterProducerListScreen.class.getName(), "KMB" + users.size());
         presenterProducerAdapter.clear();
         presenterProducerAdapter.addAll(users);
     }
@@ -78,12 +77,5 @@ public class PresenterProducerList extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
-        createButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ControlFactory.getUserController().selectUpdateUser(null);
-            }
-
-        });
     }
 }

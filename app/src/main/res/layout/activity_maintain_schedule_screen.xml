@@ -39,6 +39,32 @@
         android:hint="In minutes"
         android:inputType="numberDecimal"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Presenter"/>
+
+    <EditText
+        android:id="@+id/txtReviewSelectPresenterProducer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Producer"/>
+
+    <EditText
+        android:id="@+id/txtReviewSelectProducer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnSelectPresenterProducer"
+        android:text="Select Presenter/Producer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/btnSave"
         android:text="Save"

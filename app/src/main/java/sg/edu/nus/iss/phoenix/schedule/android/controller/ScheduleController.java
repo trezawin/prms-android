@@ -1,9 +1,11 @@
 package sg.edu.nus.iss.phoenix.schedule.android.controller;
 
+import android.app.Activity;
 import android.content.Intent;
 
 import java.util.List;
 
+import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
 import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
 import sg.edu.nus.iss.phoenix.schedule.android.delegate.CreateScheduleDelegate;
 import sg.edu.nus.iss.phoenix.schedule.android.delegate.DeleteScheduleDelegate;
@@ -88,4 +90,10 @@ public class ScheduleController {
         intent.putExtra("programSlot", programSlot);
         MainController.displayScreen(intent);
     }
+
+
+    public void selectReviewSelectPresenterProducer(Activity parentScreen, String type) {
+        ControlFactory.getReviewSelectPresenterProducerController().startUseCase(parentScreen, type);
+    }
+
 }

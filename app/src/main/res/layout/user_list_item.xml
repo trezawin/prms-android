@@ -6,6 +6,7 @@
         android:id="@+id/lblUserName"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
+        android:textSize="28sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </RelativeLayout>

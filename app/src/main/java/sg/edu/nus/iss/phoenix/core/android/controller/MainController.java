@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import sg.edu.nus.iss.phoenix.core.android.ui.MainScreen;
 
+
 public class MainController {
     private static Application app = null;
     private static String loggedInUserName = "";
@@ -65,4 +66,5 @@ public class MainController {
     public void selectMaintainUser(){
         ControlFactory.getUserController().startUseCase();
     }
+
 }

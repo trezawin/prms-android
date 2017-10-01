@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import sg.edu.nus.iss.phoenix.R;
+import sg.edu.nus.iss.phoenix.user.android.entity.Role;
 import sg.edu.nus.iss.phoenix.user.android.entity.User;
 
 /**
@@ -33,13 +34,9 @@ public class PresenterProducerAdapter extends ArrayAdapter<User> {
         }
         User user = getItem(position);
         TextView lblUserName = (TextView)listItemView.findViewById(R.id.lblUserName);
-
-        // only for presenter or producer role.
-        if(user.getRoles().contains("presenter") ||
-                user.getRoles().contains("producer")) {
-            lblUserName.setText(user.getName());
-        }
+        lblUserName.setText(user.getName());
 
         return listItemView;
     }
+
 }
