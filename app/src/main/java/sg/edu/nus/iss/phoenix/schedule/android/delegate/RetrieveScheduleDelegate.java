@@ -91,6 +91,7 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
                     String dateOfProgram = rpJson.getString("dateOfProgram");
 
                     ProgramSlot ps = new ProgramSlot();
+                    ps.setId(Integer.parseInt(rpJson.getString("id")));
                     ps.setProgramName(rpJson.getString("programName"));
                     ps.setDuration(sdf.parse(duration));
                     ps.setDateOfProgram(sdf.parse(dateOfProgram));
