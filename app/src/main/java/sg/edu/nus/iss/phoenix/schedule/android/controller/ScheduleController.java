@@ -25,7 +25,13 @@ public class ScheduleController {
         MainController.displayScreen(intent);
     }
 
-    public void createSchedule(MaintainScheduleScreen maintainScheduleScreen, ProgramSlot programSlot){
+    public void selectCreateScheduleScreen() {
+        Intent intent = new Intent(MainController.getApp(), MaintainScheduleScreen.class);
+        intent.putExtra("program_slot", new ProgramSlot());
+        MainController.displayScreen(intent);
+    }
+
+    public void createSchedule(MaintainScheduleScreen maintainScheduleScreen, ProgramSlot programSlot) {
         // TODO update DM
         new CreateScheduleDelegate(this).execute(programSlot);
         this.maintainScheduleScreen = maintainScheduleScreen;

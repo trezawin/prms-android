@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="dd/MM/yyyy HH:mm"
         android:inputType="datetime" />
 
     <TextView
@@ -35,6 +36,7 @@
         android:id="@+id/txtDuration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="In minutes"
         android:inputType="numberDecimal"/>
 
     <Button

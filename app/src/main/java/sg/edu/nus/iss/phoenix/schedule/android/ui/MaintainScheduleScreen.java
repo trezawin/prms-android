@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import sg.edu.nus.iss.phoenix.R;
 import sg.edu.nus.iss.phoenix.core.android.controller.ControlFactory;
@@ -32,28 +34,39 @@ public class MaintainScheduleScreen extends AppCompatActivity {
         programSlot = (ProgramSlot)this.getIntent().getSerializableExtra("programSlot");
 
         btnSave = (Button)findViewById(R.id.btnSave);
+        btnDelete = (Button) findViewById(R.id.btnDelete);
         txtProgram = (EditText) findViewById(R.id.txtProgram);
         txtStartDatetime = (EditText)findViewById(R.id.txtStartDatetime);
         txtDuration = (EditText)findViewById(R.id.txtDuration);
 
+        if(programSlot == null) {
+            programSlot = new ProgramSlot();
+        }
         if(programSlot.getId() > 0){
             btnDelete.setVisibility(View.VISIBLE);
         }
-        if(programSlot.getId() == 0 && !programSlot.getProgramName().equals(""))
+        if(programSlot.getId() == 0 && programSlot.getProgramName()!= null &&
+                !programSlot.getProgramName().equals(""))
             btnSave.setText("Copy");
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                btnSave.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
                 try {
                     if(MaintainScheduleScreen.this.isValidData()){
                         SimpleDateFormat startDateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                        SimpleDateFormat durationFormat = new SimpleDateFormat("HH:mm");
 
                         programSlot.setProgramName(txtProgram.getText().toString());
                         programSlot.setAssignedBy(MainController.getLoggedInUserName());
                         programSlot.setDateOfProgram(startDateTimeFormat.parse(txtStartDatetime.getText().toString()));
-                        programSlot.setDuration(durationFormat.parse(txtDuration.getText().toString()));
+
+                        Calendar durationCalendar = Calendar.getInstance();
+                        durationCalendar.setTime(new Date());
+                        durationCalendar.set(Calendar.HOUR_OF_DAY, 0);
+                        durationCalendar.set(Calendar.SECOND, 0);
+                        durationCalendar.set(Calendar.MILLISECOND, 0);
+                        durationCalendar.add(Calendar.MINUTE, Integer.parseInt(txtDuration.getText().toString()));
+                        programSlot.setDuration(durationCalendar.getTime());
 
                         if(programSlot.getId() == 0)
                             ControlFactory.getScheduleController().createSchedule(MaintainScheduleScreen.this, programSlot);
