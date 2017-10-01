@@ -7,8 +7,18 @@ import sg.edu.nus.iss.phoenix.core.android.ui.MainScreen;
 
 public class MainController {
     private static Application app = null;
+    private static String loggedInUserName = "";
+
     private String username;
     private MainScreen mainScreen;
+
+    public static void setLoggedInUserName(String name){
+        loggedInUserName = name;
+    }
+
+    public static String getLoggedInUserName(){
+        return loggedInUserName;
+    }
 
     public static Application getApp() {
         return app;

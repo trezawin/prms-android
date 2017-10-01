@@ -29,11 +29,20 @@ public class ScheduleListScreen extends AppCompatActivity {
     private ListView mListView;
     private ScheduleAdapter scheduleAdapter;
     private ProgramSlot programSlot = null;
+    private FloatingActionButton btnCreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_list);
+
+        btnCreate = (FloatingActionButton)findViewById(R.id.btnCreate);
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ControlFactory.getScheduleController().selectCreateScheduleScreen();
+            }
+        });
 
         ArrayList<ProgramSlot> programSlots = new ArrayList<ProgramSlot>();
         scheduleAdapter = new ScheduleAdapter(this, programSlots);
