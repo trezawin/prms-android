@@ -101,9 +101,6 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
                     ps.setProducerId(rpJson.getString("producerId"));
                     ps.setProducerName(rpJson.getString("producerName"));
 
-                    //TODO : to remove comment
-//                    ps.setAssignedBy((rpJson.getString("assignedBy") == null? "" : rpJson.getString("assignedBy")));
-
                     programSlots.add(ps);
 
                 }

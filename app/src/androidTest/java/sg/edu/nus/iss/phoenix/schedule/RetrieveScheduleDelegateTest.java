@@ -43,23 +43,25 @@ public class RetrieveScheduleDelegateTest {
 
     @Test
     public void testHandleResponseMsg() {
-        String result = "[\n" +
-                "    {\n" +
+        String result =
+        "[{\n" +
                 "        \"dateOfProgram\": \"2017-09-09T12:20:00+08:00\",\n" +
                 "        \"dateOfProgramTimestamp\": 0,\n" +
-                "        \"duration\": \"1970-01-01T00:12:34+07:30\",\n" +
+                "        \"duration\": \"1970-01-01T00:12:00+07:30\",\n" +
                 "        \"durationTimestamp\": 0,\n" +
-                "        \"id\": 1,\n" +
-                "        \"programName\": \"pg1\"\n" +
-                "    }\n" +
-                "]";
+                "        \"id\": 2,\n" +
+                "        \"presenterId\": \"dilbert\",\n" +
+                "        \"presenterName\": \"dilbert, the hero\",\n" +
+                "        \"producerId\": \"dilbert\",\n" +
+                "        \"producerName\": \"dilbert, the hero\",\n" +
+                "        \"programName\": \"opinions\"\n" +
+                "    }]";
         List<ProgramSlot> programSlots = new ArrayList<>();
         retrieveScheduleDelegate.processResponse(result, programSlots);
 
         // test output
         Assert.assertEquals("Object size is correct!", 1, programSlots.size());
-        Assert.assertEquals("Program name is correct!", "pg1", programSlots.get(0).getProgramName());
+        Assert.assertEquals("Program name is correct!", "opinions", programSlots.get(0).getProgramName());
 
-        // TODO : add more test cases.
     }
 }
