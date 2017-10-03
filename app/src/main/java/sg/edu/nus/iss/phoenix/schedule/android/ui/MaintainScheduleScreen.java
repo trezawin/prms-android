@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -81,7 +82,7 @@ public class MaintainScheduleScreen extends AppCompatActivity {
                         if(producer != null)
                             programSlot.setProducerId(producer.getId());
                         if(presenter != null)
-                            programSlot.setPresenterId(producer.getId());
+                            programSlot.setPresenterId(presenter.getId());
                         programSlot.setAssignedBy(MainController.getLoggedInUserName());
 
                         Calendar durationCalendar = Calendar.getInstance();
@@ -193,6 +194,16 @@ public class MaintainScheduleScreen extends AppCompatActivity {
             case 3:
                 radioProgram = (RadioProgram)data.getSerializableExtra("radio_program");
                 txtProgram.setText(radioProgram.getRadioProgramName());
+
+                SimpleDateFormat durationFormat = new SimpleDateFormat("HH:mm:ss");
+                try {
+                    Date duration = durationFormat.parse(radioProgram.getRadioProgramDuration());
+                    Calendar durationCalendar = Calendar.getInstance();
+                    durationCalendar.setTime(duration);
+                    txtDuration.setText(String.valueOf(durationCalendar.get(Calendar.MINUTE)));
+                }catch(ParseException e){
+
+                }
                 break;
         }
     }

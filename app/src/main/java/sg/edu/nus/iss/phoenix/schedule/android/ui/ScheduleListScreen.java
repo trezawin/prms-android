@@ -60,6 +60,9 @@ public class ScheduleListScreen extends AppCompatActivity {
                 ControlFactory.getScheduleController().selectCreateScheduleScreen();
             }
         });
+        if(!MainController.getLoggedInUserRoles().contains("manager")){
+            btnAddSchedule.setVisibility(View.GONE);
+        }
 
         ArrayList<ProgramSlot> programSlots = new ArrayList<ProgramSlot>();
         scheduleAdapter = new ScheduleAdapter(this, programSlots);

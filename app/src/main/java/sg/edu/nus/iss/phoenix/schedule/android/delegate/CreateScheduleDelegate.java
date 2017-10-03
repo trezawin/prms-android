@@ -75,6 +75,13 @@ public class CreateScheduleDelegate extends AsyncTask<ProgramSlot, Void, Boolean
             dos.write(256);
             Log.v(TAG, "Http POST response " + urlConnection.getResponseCode());
             success = true;
+
+            InputStream in = urlConnection.getInputStream();
+
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+            if (scanner.hasNext()) jsonResp = scanner.next();
+            success = jsonResp.equals("true");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

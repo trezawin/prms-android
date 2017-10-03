@@ -64,6 +64,6 @@ public class DeleteScheduleDelegate extends AsyncTask<Integer, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean b) {
         super.onPostExecute(b);
-        this.scheduleController.scheduleCreated(b);
+        this.scheduleController.scheduleDeleted(b);
     }
 }

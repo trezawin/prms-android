@@ -2,6 +2,7 @@ package sg.edu.nus.iss.phoenix.schedule.android.controller;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -40,7 +41,15 @@ public class ScheduleController {
     }
 
     public void scheduleCreated(Boolean status){
-        this.startUseCase();
+        if(status) {
+            this.startUseCase();
+            Toast toast = Toast.makeText(MainController.getApp(), "Saved successfully!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        else{
+            Toast toast = Toast.makeText(MainController.getApp(), "Saving failed. Another program slot is assigned at this time already!", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
     public void updateSchedule(MaintainScheduleScreen maintainScheduleScreen, ProgramSlot programSlot){
@@ -50,7 +59,15 @@ public class ScheduleController {
     }
 
     public void scheduleUpdated(Boolean status){
-        this.startUseCase();
+        if(status) {
+            this.startUseCase();
+            Toast toast = Toast.makeText(MainController.getApp(), "Saved successfully!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        else{
+            Toast toast = Toast.makeText(MainController.getApp(), "Saving failed. Another program slot is assigned at this time already!", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
     public void deleteSchedule(MaintainScheduleScreen maintainScheduleScreen, int scheduleId){
@@ -60,7 +77,15 @@ public class ScheduleController {
     }
 
     public void scheduleDeleted(Boolean status){
-        this.startUseCase();
+        if(status){
+            this.startUseCase();
+            Toast toast = Toast.makeText(MainController.getApp(), "Deleted successfully!", Toast.LENGTH_LONG);
+            toast.show();
+        }else{
+            Toast toast = Toast.makeText(MainController.getApp(), "Deletion failed!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+
     }
 
     public void onDisplayScheduleList(ScheduleListScreen scheduleListScreen) {

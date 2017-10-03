@@ -46,6 +46,9 @@ public class UserList extends AppCompatActivity {
         mListView = (ListView)findViewById(R.id.userListView);
         mListView.setAdapter(userAdapter);
 
+        if(!MainController.getLoggedInUserRoles().contains("admin"))
+            createButton.setVisibility(View.GONE);
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override

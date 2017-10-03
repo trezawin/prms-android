@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.TimeZone;
 
+import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
 import sg.edu.nus.iss.phoenix.radioprogram.android.controller.ProgramController;
 import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.schedule.android.controller.ScheduleController;
@@ -84,6 +85,7 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
             try {
                 JSONArray rpArray = new JSONArray(result);
 
+                List<ProgramSlot> tempProgramSlots = new ArrayList<ProgramSlot>();
                 for (int i = 0; i < rpArray.length(); i++) {
                     JSONObject rpJson = rpArray.getJSONObject(i);
 
@@ -96,13 +98,33 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
                     ps.setDuration(sdf.parse(duration));
                     ps.setDateOfProgram(sdf.parse(dateOfProgram));
 
-                    ps.setPresenterId(rpJson.getString("presenterId"));
-                    ps.setPresenterName(rpJson.getString("presenterName"));
-                    ps.setProducerId(rpJson.getString("producerId"));
-                    ps.setProducerName(rpJson.getString("producerName"));
 
-                    programSlots.add(ps);
+                    if(rpJson.has("presenterId") && !rpJson.getString("presenterId").equals("")){
+                        ps.setPresenterId(rpJson.getString("presenterId"));
+                        ps.setPresenterName(rpJson.getString("presenterName"));
+                    }
+                    if(rpJson.has("producerId") && !rpJson.getString("producerId").equals("")){
+                        ps.setProducerId(rpJson.getString("producerId"));
+                        ps.setProducerName(rpJson.getString("producerName"));
+                    }
 
+                    tempProgramSlots.add(ps);
+
+                }
+
+                if(MainController.getLoggedInUserRoles().contains("manager")){
+                    for (ProgramSlot tempPS: tempProgramSlots){
+                        programSlots.add(tempPS);
+                    }
+                }else if(MainController.getLoggedInUserRoles().contains("producer") ||
+                        MainController.getLoggedInUserRoles().contains("presenter")
+                        ){
+                    for (ProgramSlot tempPS: tempProgramSlots){
+                        if((tempPS.getProducerId() != null && tempPS.getProducerId().equals(MainController.getLoggedInUserName())) ||
+                                (tempPS.getPresenterId() != null && tempPS.getPresenterId().equals(MainController.getLoggedInUserName()))){
+                            programSlots.add(tempPS);
+                        }
+                    }
                 }
             } catch (JSONException e) {
                 Log.v(TAG, e.getMessage());

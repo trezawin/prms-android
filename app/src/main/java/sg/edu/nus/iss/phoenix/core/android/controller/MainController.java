@@ -9,17 +9,22 @@ import sg.edu.nus.iss.phoenix.core.android.ui.MainScreen;
 public class MainController {
     private static Application app = null;
     private static String loggedInUserName = "";
+    private static String loggedInUserRoles = "";
 
     private String username;
     private MainScreen mainScreen;
 
-    public static void setLoggedInUserName(String name){
+    public static void setLoggedInUserName1(String name){
         loggedInUserName = name;
     }
 
     public static String getLoggedInUserName(){
         return loggedInUserName;
     }
+
+    public static void setLoggedInUserRoles(String roles) { loggedInUserRoles = roles; }
+
+    public static String getLoggedInUserRoles() { return loggedInUserRoles; }
 
     public static Application getApp() {
         return app;
@@ -39,6 +44,7 @@ public class MainController {
 
         Intent intent = new Intent(MainController.getApp(), MainScreen.class);
         MainController.displayScreen(intent);
+        MainController.setLoggedInUserName1(username);
     }
 
     public void onDisplay(MainScreen mainScreen) {

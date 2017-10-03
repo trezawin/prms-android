@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import sg.edu.nus.iss.phoenix.core.android.controller.MainController;
 import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.user.android.controller.UserController;
 import sg.edu.nus.iss.phoenix.user.android.entity.Role;
@@ -75,17 +76,34 @@ public class RetrieveUsersDelegate extends AsyncTask<String, Void, String> {
             try {
                 JSONArray rpArray = new JSONArray(result);
 
-                for (int i = 0; i < rpArray.length(); i++) {
-                    JSONObject userJson = rpArray.getJSONObject(i);
-                    String id = userJson.getString("id");
-                    String name = userJson.getString("name");
-                    String password = userJson.getString("password");
-                    JSONArray rolesJsonArray =  userJson.getJSONArray("roles");
-                    ArrayList<Role> roleList = new ArrayList<Role>();
-                    for(int ii = 0; ii < rolesJsonArray.length(); ii++){
-                        roleList.add(new Role(rolesJsonArray.getJSONObject(ii).getString("role")));
+                if(MainController.getLoggedInUserRoles().contains("admin")){
+                    for (int i = 0; i < rpArray.length(); i++) {
+                        JSONObject userJson = rpArray.getJSONObject(i);
+                        String id = userJson.getString("id");
+                        String name = userJson.getString("name");
+                        String password = userJson.getString("password");
+                        JSONArray rolesJsonArray =  userJson.getJSONArray("roles");
+                        ArrayList<Role> roleList = new ArrayList<Role>();
+                        for(int ii = 0; ii < rolesJsonArray.length(); ii++){
+                            roleList.add(new Role(rolesJsonArray.getJSONObject(ii).getString("role")));
+                        }
+                        userList.add(new User(id, password, name, roleList));
                     }
-                    userList.add(new User(id, password, name, roleList));
+                }else{
+                    for (int i = 0; i < rpArray.length(); i++) {
+                        JSONObject userJson = rpArray.getJSONObject(i);
+                        if(userJson.getString("id").equals(MainController.getLoggedInUserName())){
+                            String id = userJson.getString("id");
+                            String name = userJson.getString("name");
+                            String password = userJson.getString("password");
+                            JSONArray rolesJsonArray =  userJson.getJSONArray("roles");
+                            ArrayList<Role> roleList = new ArrayList<Role>();
+                            for(int ii = 0; ii < rolesJsonArray.length(); ii++){
+                                roleList.add(new Role(rolesJsonArray.getJSONObject(ii).getString("role")));
+                            }
+                            userList.add(new User(id, password, name, roleList));
+                        }
+                    }
                 }
             } catch (JSONException e) {
                 Log.v(TAG, e.getMessage());
