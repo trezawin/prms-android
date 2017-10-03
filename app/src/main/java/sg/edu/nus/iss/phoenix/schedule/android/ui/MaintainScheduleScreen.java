@@ -169,12 +169,26 @@ public class MaintainScheduleScreen extends AppCompatActivity {
 
     public boolean isValidData() {
         if(txtProgram.getText().toString().equals("")){
+            Toast toast = Toast.makeText(MainController.getApp(), "Program name cannot be empty!", Toast.LENGTH_LONG);
+            toast.show();
             return false;
         }
         if(txtStartDatetime.getText().toString().equals("")){
+            Toast toast = Toast.makeText(MainController.getApp(), "Program date cannot be empty!", Toast.LENGTH_LONG);
+            toast.show();
             return false;
+        }else{
+            SimpleDateFormat startDateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            try {
+                startDateTimeFormat.parse(txtStartDatetime.getText().toString());
+            }catch (ParseException e){
+                Toast toast = Toast.makeText(MainController.getApp(), "Invalid program date!", Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
         if(txtDuration.getText().toString().equals("")){
+            Toast toast = Toast.makeText(MainController.getApp(), "Duration cannot be empty!", Toast.LENGTH_LONG);
+            toast.show();
             return false;
         }
         return true;
