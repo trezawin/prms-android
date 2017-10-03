@@ -19,11 +19,17 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import sg.edu.nus.iss.phoenix.R;
@@ -33,7 +39,9 @@ import sg.edu.nus.iss.phoenix.core.android.ui.MainScreen;
 import sg.edu.nus.iss.phoenix.radioprogram.entity.RadioProgram;
 import sg.edu.nus.iss.phoenix.schedule.android.entity.ProgramSlot;
 
+import static android.R.attr.filter;
 import static android.R.attr.mode;
+import static android.R.attr.start;
 
 public class ScheduleListScreen extends AppCompatActivity {
 
@@ -41,6 +49,9 @@ public class ScheduleListScreen extends AppCompatActivity {
     private ScheduleAdapter scheduleAdapter;
     private ProgramSlot programSlot = null;
     private FloatingActionButton btnAddSchedule;
+    private EditText txtStartDate;
+    private EditText txtEndDate;
+    private Button btnFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +89,56 @@ public class ScheduleListScreen extends AppCompatActivity {
                 ControlFactory.getScheduleController().selectCreateSchedule();
             }
         });
+
+        txtStartDate = (EditText)findViewById(R.id.txtStartDate);
+        txtEndDate = (EditText)findViewById(R.id.txtEndDate);
+
+        SimpleDateFormat filterDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        txtStartDate.setText(filterDateFormat.format(new Date()));
+        txtEndDate.setText(txtStartDate.getText().toString());
+
+        btnFilter = (Button)findViewById(R.id.btnFilter);
+        btnFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    load();
+                }catch (ParseException e){
+                    Toast toast = Toast.makeText(MainController.getApp(), "Invalid date format!", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+    }
+
+    private void load() throws ParseException{
+        SimpleDateFormat filterDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date startDate = filterDateFormat.parse(txtStartDate.getText().toString());
+        Date endDate = filterDateFormat.parse(txtEndDate.getText().toString());
+
+        Calendar calendarStart = Calendar.getInstance();
+        calendarStart.setTime(startDate);
+        calendarStart.set(Calendar.HOUR_OF_DAY, 0);
+        calendarStart.set(Calendar.MINUTE, 0);
+        calendarStart.set(Calendar.SECOND, 0);
+        calendarStart.set(Calendar.MILLISECOND, 0);
+        startDate = calendarStart.getTime();
+
+        Calendar calendarEnd = Calendar.getInstance();
+        calendarEnd.setTime(endDate);
+        calendarEnd.set(Calendar.HOUR_OF_DAY, 0);
+        calendarEnd.set(Calendar.MINUTE, 0);
+        calendarEnd.set(Calendar.SECOND, 0);
+        calendarEnd.set(Calendar.MILLISECOND, 0);
+        endDate = calendarEnd.getTime();
+
+        if(endDate.getTime() >= startDate.getTime()){
+            ControlFactory.getScheduleController().onDisplayScheduleList(ScheduleListScreen.this, startDate.getTime(), endDate.getTime());
+        }else{
+            Toast toast = Toast.makeText(MainController.getApp(), "End date cannot be smaller than Start Date!", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
     // back button action bar
@@ -129,7 +190,12 @@ public class ScheduleListScreen extends AppCompatActivity {
         super.onPostCreate(savedInstanceState);
         mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         mListView.setSelection(0);
-        ControlFactory.getScheduleController().onDisplayScheduleList(this);
+        try {
+            load();
+        }catch (ParseException e){
+            Toast toast = Toast.makeText(MainController.getApp(), "Invalid date format!", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
     public void showProgramslots(List<ProgramSlot> programSlots) {

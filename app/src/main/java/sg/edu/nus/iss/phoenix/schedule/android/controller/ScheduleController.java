@@ -88,9 +88,9 @@ public class ScheduleController {
 
     }
 
-    public void onDisplayScheduleList(ScheduleListScreen scheduleListScreen) {
+    public void onDisplayScheduleList(ScheduleListScreen scheduleListScreen, long startTimeStamp, long endTimeStamp) {
         this.scheduleListScreen = scheduleListScreen;
-        new RetrieveScheduleDelegate(this).execute("all");
+        new RetrieveScheduleDelegate(this).execute("all", String.valueOf(startTimeStamp), String.valueOf(endTimeStamp));
     }
 
     public void retrievedSchedules(List<ProgramSlot> programSlots) {

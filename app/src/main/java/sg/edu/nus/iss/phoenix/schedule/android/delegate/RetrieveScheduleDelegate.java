@@ -42,12 +42,12 @@ public class RetrieveScheduleDelegate extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        Uri builtUri1 = Uri.parse(PRMS_BASE_URL_SCHEDULE).buildUpon().build();
-        Uri builtUri = Uri.withAppendedPath(builtUri1, params[0]).buildUpon().build();
-        Log.v(TAG, builtUri.toString());
+        String scheduleUri = PRMS_BASE_URL_SCHEDULE + "/" + params[0] + "/" + params[1] + "/" + params[2];
+        Uri builtUri1 = Uri.parse(scheduleUri).buildUpon().build();
+        Log.v(TAG, builtUri1.toString());
         URL url = null;
         try {
-            url = new URL(builtUri.toString());
+            url = new URL(builtUri1.toString());
         } catch (MalformedURLException e) {
             Log.v(TAG, e.getMessage());
             return e.getMessage();
