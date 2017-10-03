@@ -48,7 +48,7 @@ public class ScheduleListScreen extends AppCompatActivity {
     private ListView mListView;
     private ScheduleAdapter scheduleAdapter;
     private ProgramSlot programSlot = null;
-    private FloatingActionButton btnAddSchedule;
+    private Button btnAddSchedule;
     private EditText txtStartDate;
     private EditText txtEndDate;
     private Button btnFilter;
@@ -64,7 +64,7 @@ public class ScheduleListScreen extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
-        btnAddSchedule = (FloatingActionButton)findViewById(R.id.btnAddSchedule);
+        btnAddSchedule = (Button) findViewById(R.id.btnAddSchedule);
         btnAddSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,15 +80,6 @@ public class ScheduleListScreen extends AppCompatActivity {
         mListView = (ListView)findViewById(R.id.scheduleListView);
         mListView.setAdapter(scheduleAdapter);
         registerForContextMenu(mListView); // register the context menu.
-
-        // Setup FAB to add new controller.
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btnAddSchedule);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ControlFactory.getScheduleController().selectCreateSchedule();
-            }
-        });
 
         txtStartDate = (EditText)findViewById(R.id.txtStartDate);
         txtEndDate = (EditText)findViewById(R.id.txtEndDate);
@@ -131,6 +122,8 @@ public class ScheduleListScreen extends AppCompatActivity {
         calendarEnd.set(Calendar.MINUTE, 0);
         calendarEnd.set(Calendar.SECOND, 0);
         calendarEnd.set(Calendar.MILLISECOND, 0);
+        calendarEnd.add(Calendar.DAY_OF_MONTH, 1);
+        calendarEnd.add(Calendar.SECOND, -1);
         endDate = calendarEnd.getTime();
 
         if(endDate.getTime() >= startDate.getTime()){

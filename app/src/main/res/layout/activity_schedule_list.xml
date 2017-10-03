@@ -36,6 +36,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/btnAddSchedule"
+        android:text="Add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -48,17 +54,5 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context=".schedule.android.ui.ScheduleListScreen">
     </ListView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnAddSchedule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/ic_create"
-        android:layout_marginLeft="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin" />
 
 </LinearLayout>
